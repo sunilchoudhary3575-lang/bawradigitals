@@ -27,7 +27,7 @@ const FAQSection = () => {
   };
 
   return (
-    <section style={{ backgroundColor: 'var(--bg-soft)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '6.5rem 0' }}>
+    <section style={{ backgroundColor: 'var(--bg-soft)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '6.5rem 0', position: 'relative', overflow: 'hidden' }}>
       {/* Background decoration */}
       <div className="grid-overlay" />
 

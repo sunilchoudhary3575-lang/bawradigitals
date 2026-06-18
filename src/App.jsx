@@ -72,13 +72,15 @@ function App() {
         position: 'fixed',
         bottom: 0,
         left: 0,
-        width: '100%',
+        right: 0,
+        boxSizing: 'border-box',
         backgroundColor: 'rgba(5, 20, 41, 0.98)',
         backdropFilter: 'blur(8px)',
         borderTop: '2px solid var(--cyan)',
-        padding: '0.75rem 1rem',
+        padding: '0.65rem 1rem',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
+        gap: '1.25rem',
         zIndex: 9998, /* Places it right under the floating WhatsApp button */
         boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.4)',
         transform: showStickyBar ? 'translateY(0)' : 'translateY(100%)',
@@ -86,7 +88,7 @@ function App() {
       }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem', textAlign: 'left', flexShrink: 1, marginRight: '0.5rem' }}>
           <span style={{ fontSize: '0.65rem', color: 'var(--cyan)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Free Offer</span>
-          <span style={{ fontSize: '0.85rem', color: 'white', fontWeight: 700, lineHeight: 1.2 }}>Free IVF Growth Audit</span>
+          <span style={{ fontSize: '0.8rem', color: 'white', fontWeight: 700, lineHeight: 1.2 }}>Free IVF Growth Audit</span>
         </div>
         <button
           onClick={() => {
@@ -94,8 +96,8 @@ function App() {
             if (element) element.scrollIntoView({ behavior: 'smooth' });
           }}
           style={{
-            padding: '0.55rem 1.15rem',
-            fontSize: '0.85rem',
+            padding: '0.45rem 0.95rem',
+            fontSize: '0.8rem',
             backgroundColor: 'var(--cyan)',
             color: 'white',
             border: 'none',
