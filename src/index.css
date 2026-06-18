@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Bawra Digitals brand colors */
+  --primary: #003580;       /* Bawra Navy (Trust & Authority) */
+  --primary-dark: #051429;  /* Deep Navy for backgrounds */
+  --primary-light: #1e4f9c; /* Medium Navy */
+  --cyan: #0ea5e9;          /* Bawra Cyan (Clinical Blue/Cyan, Highlights) */
+  --purple: #800080;        /* Bawra Purple (Creative/Branding Highlight) */
+  --orange: #ff9a00;        /* Bawra Orange (Conversion CTA / High Contrast) */
+  
+  --bg-main: #ffffff;
+  --bg-soft: #f4f7fc;       /* Soft cool blue/gray background */
+  --bg-card: #ffffff;
+  --bg-gradient-start: #f0f5fa;
+  --bg-gradient-end: #f0f9ff;
+  
+  --text-main: #334155;     /* Slate 700 */
+  --text-dark: #0a1128;     /* Very Dark Navy/Slate 900 */
+  --text-muted: #576882;    /* Navy-gray Slate 500 */
+  --text-light: #8fa0b5;    /* Slate 400 */
+  --text-white: #ffffff;
+
+  --border: #e1e7f0;        /* Cool Slate border */
+  --border-light: #f1f5f9;  
+  
+  --shadow-sm: 0 1px 3px rgba(0, 53, 128, 0.05);
+  --shadow-md: 0 4px 12px -1px rgba(0, 53, 128, 0.08), 0 2px 4px -2px rgba(0, 53, 128, 0.08);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 53, 128, 0.1), 0 8px 10px -6px rgba(0, 53, 128, 0.1);
+  --shadow-xl: 0 20px 40px -15px rgba(0, 53, 128, 0.15);
+  --shadow-cyan: 0 8px 20px rgba(14, 165, 233, 0.2);
+  --shadow-orange: 0 8px 20px rgba(255, 154, 0, 0.25);
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  background-color: var(--bg-main);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Remove default template restrictions */
+#root {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  text-align: left !important;
+  border-inline: none !important;
+  min-height: auto !important;
+  display: block !important;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--text-dark);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+p {
+  color: var(--text-muted);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Gradients & Backgrounds */
+.bg-gradient-hero {
+  background: 
+    radial-gradient(circle at 15% 25%, rgba(14, 165, 233, 0.04) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(255, 154, 0, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(0, 53, 128, 0.03) 0%, transparent 60%),
+    #ffffff;
+}
+
+.bg-gradient-section {
+  background: linear-gradient(180deg, var(--bg-main) 0%, var(--bg-soft) 100%);
+}
+
+.bg-gradient-dark {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, #030a14 100%);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 750;
+  font-size: 1rem;
+  padding: 0.875rem 1.85rem;
+  border-radius: var(--radius-md);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 2px solid transparent;
+  gap: 0.5rem;
+}
+
+/* Primary Blue Gradient Button */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: var(--text-white);
+  box-shadow: 0 4px 15px rgba(0, 53, 128, 0.2);
+  border: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 53, 128, 0.32);
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Secondary Button with Brand Blue border shifting to solid on hover */
+.btn-secondary {
+  background: transparent;
+  color: var(--primary-light);
+  border: 2px solid var(--primary-light);
+  box-shadow: 0 4px 12px rgba(0, 53, 128, 0.03);
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 53, 128, 0.25);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* Dark Button with Deep Corporate Blue */
+.btn-dark {
+  background: var(--primary-dark);
+  color: var(--text-white);
+  box-shadow: 0 4px 14px rgba(0, 53, 128, 0.25);
+  border: none;
+}
+
+.btn-dark:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 53, 128, 0.35);
+  background: var(--primary);
+}
+
+.btn-dark:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-dark);
+  border: 2px solid var(--border);
+}
+
+.btn-outline:hover {
+  background: var(--bg-soft);
+  border-color: var(--text-muted);
+  transform: translateY(-2px);
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 1.1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.badge-primary {
+  background-color: rgba(0, 53, 128, 0.08);
+  color: var(--primary);
+}
+
+.badge-cyan {
+  background-color: rgba(14, 165, 233, 0.08);
+  color: var(--cyan);
+}
+
+.badge-orange {
+  background-color: rgba(255, 154, 0, 0.1);
+  color: #d97706;
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+section {
+  padding: 6.5rem 0;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 4.5rem 0;
+  }
+}
+
+/* Abstract backgrounds & grids */
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0, 53, 128, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Text Gradients */
+.text-gradient-cyan {
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--primary-light) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--cyan); /* Fallback */
+  display: inline;
+}
+
+.text-gradient-cta {
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--orange) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--cyan); /* Fallback */
+  display: inline;
+}
+
+@keyframes whatsapp-pulse {
+  0% {
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3), 0 0 0 0px rgba(37, 211, 102, 0.4);
+  }
+  70% {
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3), 0 0 0 12px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3), 0 0 0 0px rgba(37, 211, 102, 0);
+  }
+}
+
+/* Floating WhatsApp Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #25D366;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 9999;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: whatsapp-pulse 2s infinite;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45) !important;
+}
+
+@media (max-width: 768px) {
+  .whatsapp-float {
+    bottom: 5.5rem !important; /* Raised on mobile to avoid overlapping the sticky bar */
+    right: 1.25rem !important;
+  }
+}
+
+/* Mobile Sticky Free Audit Bar */
+.mobile-sticky-bar {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .mobile-sticky-bar.visible {
+    display: flex !important;
+  }
+}
