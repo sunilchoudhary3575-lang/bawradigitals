@@ -86,7 +86,7 @@ function App() {
         transform: showStickyBar ? 'translateY(0)' : 'translateY(100%)',
         transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', width: '100%', maxWidth: '420px', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', maxWidth: '480px' }}>
           <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', flexShrink: 1 }}>
             <span style={{ fontSize: '0.6rem', color: 'var(--cyan)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', lineHeight: 1.1 }}>Free Offer</span>
             <span style={{ fontSize: '0.82rem', color: 'white', fontWeight: 750, lineHeight: 1.2, whiteSpace: 'nowrap' }}>Free IVF Audit</span>
