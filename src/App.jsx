@@ -77,39 +77,41 @@ function App() {
         backgroundColor: 'rgba(5, 20, 41, 0.98)',
         backdropFilter: 'blur(8px)',
         borderTop: '2px solid var(--cyan)',
-        padding: '0.65rem 1rem',
+        padding: '0.55rem 1rem',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: '1.25rem',
+        gap: '0.75rem',
         zIndex: 9998, /* Places it right under the floating WhatsApp button */
         boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.4)',
         transform: showStickyBar ? 'translateY(0)' : 'translateY(100%)',
         transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
       }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem', textAlign: 'left', flexShrink: 1, marginRight: '0.5rem' }}>
-          <span style={{ fontSize: '0.65rem', color: 'var(--cyan)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Free Offer</span>
-          <span style={{ fontSize: '0.8rem', color: 'white', fontWeight: 700, lineHeight: 1.2 }}>Free IVF Growth Audit</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', width: '100%', maxWidth: '420px', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', flexShrink: 1 }}>
+            <span style={{ fontSize: '0.6rem', color: 'var(--cyan)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', lineHeight: 1.1 }}>Free Offer</span>
+            <span style={{ fontSize: '0.82rem', color: 'white', fontWeight: 750, lineHeight: 1.2, whiteSpace: 'nowrap' }}>Free IVF Audit</span>
+          </div>
+          <button
+            onClick={() => {
+              const element = document.getElementById('contact');
+              if (element) element.scrollIntoView({ behavior: 'smooth' });
+            }}
+            style={{
+              padding: '0.45rem 1rem',
+              fontSize: '0.8rem',
+              backgroundColor: 'var(--cyan)',
+              color: 'white',
+              border: 'none',
+              borderRadius: 'var(--radius-sm)',
+              fontWeight: 800,
+              cursor: 'pointer',
+              boxShadow: '0 4px 12px rgba(14, 165, 233, 0.3)',
+              flexShrink: 0
+            }}
+          >
+            Claim Now
+          </button>
         </div>
-        <button
-          onClick={() => {
-            const element = document.getElementById('contact');
-            if (element) element.scrollIntoView({ behavior: 'smooth' });
-          }}
-          style={{
-            padding: '0.45rem 0.95rem',
-            fontSize: '0.8rem',
-            backgroundColor: 'var(--cyan)',
-            color: 'white',
-            border: 'none',
-            borderRadius: 'var(--radius-sm)',
-            fontWeight: 750,
-            cursor: 'pointer',
-            boxShadow: '0 4px 12px rgba(14, 165, 233, 0.3)',
-            flexShrink: 0
-          }}
-        >
-          Claim Now
-        </button>
       </div>
 
       {/* Floating WhatsApp Button */}

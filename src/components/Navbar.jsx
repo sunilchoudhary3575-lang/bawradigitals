@@ -47,7 +47,8 @@ const Navbar = () => {
           <img 
             src={logoImg} 
             alt="Bawra Digitals Logo" 
-            style={{ height: '44px', width: 'auto', objectFit: 'contain' }} 
+            className="navbar-logo"
+            style={{ width: 'auto', objectFit: 'contain' }} 
           />
         </div>
 
@@ -196,6 +197,15 @@ const Navbar = () => {
 
       {/* CSS styling for responsive navbar */}
       <style>{`
+        .navbar-logo {
+          height: 34px;
+          transition: height 0.3s ease;
+        }
+        @media (max-width: 768px) {
+          .navbar-logo {
+            height: 26px;
+          }
+        }
         @media (min-width: 769px) {
           .desktop-menu-container {
             display: flex !important;
