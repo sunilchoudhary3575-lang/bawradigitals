@@ -9,9 +9,9 @@ const ProblemSection = () => {
           <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
         </svg>
       ),
-      title: "High ad spend, low-quality enquiries",
-      desc: "People fill forms but don’t visit the clinic.",
-      detail: "Random leads clicking ads by mistake or looking for 'free treatment' drain your budget without booking consultations.",
+      title: "High spend, low-quality enquiries",
+      desc: "Forms get filled, but patients never visit the clinic.",
+      detail: "Unqualified leads clicking ads by mistake drain your budget without booking consultations.",
       image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80",
     },
     {
@@ -27,9 +27,9 @@ const ProblemSection = () => {
           <line x1="17" y1="7" x2="22" y2="7"></line>
         </svg>
       ),
-      title: "Generic content",
-      desc: "Every clinic posts the same ‘IVF available’ creatives.",
-      detail: "Stock graphics and copy-pasted medical flyers don’t convey care, expert capability, or doctor personality.",
+      title: "Generic stock creative templates",
+      desc: "Every clinic posts the exact same stock designs.",
+      detail: "Templated flyers and copy-pasted medical graphics fail to convey trust, care, or clinical authority.",
       image: "https://images.unsplash.com/photo-1616391182219-e080b4d1043a?auto=format&fit=crop&w=600&q=80",
     },
     {
@@ -41,9 +41,9 @@ const ProblemSection = () => {
           <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
         </svg>
       ),
-      title: "Low trust before appointment",
-      desc: "Couples compare doctors, reviews, reels, success stories.",
-      detail: "Before committing to a high-ticket procedure like IVF, couples thoroughly vet the doctor's videos, patient feedback, and digital presence.",
+      title: "Low trust before booking",
+      desc: "Couples compare multiple clinics, reviews, and reels.",
+      detail: "Before committing to high-ticket IVF treatments, couples thoroughly vet the doctor's videos and patient reviews.",
       image: "https://images.unsplash.com/photo-1508962914676-134849a727f0?auto=format&fit=crop&w=600&q=80",
     },
     {
@@ -53,9 +53,9 @@ const ProblemSection = () => {
           <polyline points="22 4 12 14.01 9 11.01"></polyline>
         </svg>
       ),
-      title: "Weak follow-up system",
-      desc: "Leads come, but many don’t convert into consultation.",
-      detail: "No structured nurse/coordinator calling protocols, delays in response, and lack of WhatsApp nurturing loops lead to missed OPD visits.",
+      title: "No nurturing follow-up system",
+      desc: "Enquiries drop off without booking a consultation.",
+      detail: "Delays in response and a lack of WhatsApp nurturing loops lead to missed OPD conversion opportunities.",
       image: "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=600&q=80",
     }
   ];

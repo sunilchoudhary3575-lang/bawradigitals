@@ -6,11 +6,12 @@ import SolutionSection from './components/SolutionSection';
 import AuditSection from './components/AuditSection';
 import TrustSection from './components/TrustSection';
 import FounderSection from './components/FounderSection';
+import TestimonialsSection from './components/TestimonialsSection';
 import ContentIdeasSection from './components/ContentIdeasSection';
 import LeadForm from './components/LeadForm';
-import FAQSection from './components/FAQSection';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
+import BelieversSection from './components/BelieversSection';
 
 function App() {
   const [showStickyBar, setShowStickyBar] = useState(false);
@@ -36,6 +37,9 @@ function App() {
         {/* Hero Section */}
         <Hero />
 
+        {/* Core Believers hospital logos scroll */}
+        <BelieversSection />
+
         {/* Why IVF Clinics Don't Get Quality Leads */}
         <ProblemSection />
 
@@ -48,7 +52,10 @@ function App() {
         {/* We Understand Healthcare Marketing stats and proof */}
         <TrustSection />
 
-        {/* Meet the Founder & Clinical Marketing Philosophy */}
+        {/* Client Testimonials Section */}
+        <TestimonialsSection />
+
+        {/* Our Work Gallery Section */}
         <FounderSection />
 
         {/* Content That IVF Patients Actually Watch (hindi/english reel ideas) */}
@@ -57,8 +64,7 @@ function App() {
         {/* Interactive Audit Booking Lead Form */}
         <LeadForm />
 
-        {/* Frequently Asked Questions (Medical marketing objections, legal compliance) */}
-        <FAQSection />
+
 
         {/* Final urging call-to-action */}
         <FinalCTA />

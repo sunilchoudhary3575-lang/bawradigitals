@@ -6,19 +6,19 @@ const FAQSection = () => {
   const faqs = [
     {
       question: "How can this audit be 100% free? What’s the catch?",
-      answer: "There is no catch or hidden subscription. We do this to demonstrate our value and deep healthcare expertise to IVF clinic owners first. If you find our recommendations valuable and want us to implement the trust-funnel systems for you, we can discuss a partnership. If not, the actionable insights are yours to keep."
+      answer: "No catch. We provide the audit to show our value first. If you want us to implement the trust systems for you, we can discuss a partnership. If not, the actionable insights are yours to keep."
     },
     {
-      question: "Do you understand medical marketing compliance (like PC-PNDT in India)?",
-      answer: "Yes, completely. Healthcare marketing requires absolute compliance with legal and ethical guidelines. We never run ads promoting gender determination, we do not make false success rate claims, and we avoid commercial gimmicks. All our reel scripts, landing pages, and campaign hooks focus purely on patient education and doctor credibility."
+      question: "Do you understand medical marketing compliance (like PC-PNDT)?",
+      answer: "Yes, fully. We respect all legal/ethical guidelines, never run gender selection ads, make false success rate claims, or use commercial gimmicks. Content is purely educational."
     },
     {
       question: "What credentials or account access do you need?",
-      answer: "None. We do not require your passwords or dashboard access. Our team audits your public-facing presence (social media, Google Maps profile, website, and ad communication) from the viewpoint of a high-ticket patient to identify exactly where enquiries are leaking."
+      answer: "None. We only audit your public-facing presence (social media, Google listing, and website) from a high-intent patient's perspective."
     },
     {
       question: "How long does it take to receive the audit report?",
-      answer: "Since we do not use automated software scanners, each audit is manually researched by our strategy team. It takes 24 to 48 hours to compile. Once completed, we will send you a personalized video walkthrough or PDF report directly on WhatsApp."
+      answer: "Each audit is manually researched by our team and delivered via video/PDF directly on WhatsApp within 24 to 48 hours."
     }
   ];
 

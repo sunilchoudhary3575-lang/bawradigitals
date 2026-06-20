@@ -10,21 +10,9 @@ const SolutionSection = () => {
         </svg>
       ),
       title: "Doctor Face Reels",
-      desc: "Build authority and personal trust with educational face-camera videos.",
-      points: ["Answer patients' secret fears", "Create immediate digital comfort", "Showcase patient empathy"],
+      desc: "Build clinical authority and personal trust with patient education reels.",
+      points: ["Address patient fears", "Bilingual content (Hindi/English)", "Empathy-focused scripts"],
       image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80",
-    },
-    {
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-        </svg>
-      ),
-      title: "Patient Education Content",
-      desc: "Explain IVF myths, age factor, male infertility, embryo transfer care, and pregnancy delay topics.",
-      points: ["Clear, accurate clinical facts", "Bilingual content (Hindi/English)", "Overcome fertility taboos"],
-      image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80",
     },
     {
       icon: (
@@ -35,8 +23,8 @@ const SolutionSection = () => {
         </svg>
       ),
       title: "Lead Generation Ads",
-      desc: "Run focused campaigns for serious couples, not random traffic.",
-      points: ["High-intent demographic filters", "Clear value propositions", "Pre-qualifying questions in ads"],
+      desc: "Run campaigns targeting serious couples looking for specialized treatment.",
+      points: ["High-intent demographic filters", "Pre-qualifying questions", "No accidental clicks"],
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
     },
     {
@@ -46,8 +34,8 @@ const SolutionSection = () => {
         </svg>
       ),
       title: "Landing Page + WhatsApp Funnel",
-      desc: "Capture enquiries properly and improve follow-up.",
-      points: ["High-converting page layouts", "Instant automated WhatsApp alerts", "Nurturing information packets"],
+      desc: "Capture patient enquiries cleanly and follow up automatically.",
+      points: ["High-converting mobile pages", "Instant WhatsApp notification", "Automated patient nurturing"],
       image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80",
     },
     {
@@ -56,21 +44,10 @@ const SolutionSection = () => {
           <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
         </svg>
       ),
-      title: "Review & Reputation Growth",
-      desc: "Improve credibility because IVF patients check trust before calling.",
-      points: ["Systematic Google review audits", "Video testimonial templates", "Handle patient privacy securely"],
+      title: "Reputation & Review Growth",
+      desc: "Get clinical reviews and video success stories from happy patients.",
+      points: ["Google review campaigns", "Video testimonial guidance", "Strict medical compliance"],
       image: "https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&w=600&q=80",
-    },
-    {
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-        </svg>
-      ),
-      title: "Creative Medical Branding",
-      desc: "Make your clinic look expert, caring, and reliable online.",
-      points: ["Premium design aesthetics", "Warm medical color tones", "Uniform look across socials"],
-      image: "https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&w=600&q=80",
     }
   ];
 

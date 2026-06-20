@@ -30,18 +30,19 @@ const Footer = () => {
           {/* Brand Col */}
           <div>
             <div style={{
-              backgroundColor: 'white',
-              padding: '0.4rem 0.8rem',
-              borderRadius: 'var(--radius-sm)',
               display: 'inline-flex',
               alignItems: 'center',
               marginBottom: '1.25rem',
-              boxShadow: 'var(--shadow-sm)',
             }}>
               <img 
                 src={logoImg} 
                 alt="Bawra Digitals Logo" 
-                style={{ height: '32px', width: 'auto', objectFit: 'contain' }} 
+                style={{
+                  height: '32px',
+                  width: 'auto',
+                  objectFit: 'contain',
+                  filter: 'brightness(0) invert(1)'
+                }} 
               />
             </div>
             

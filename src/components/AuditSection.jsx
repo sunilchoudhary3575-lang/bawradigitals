@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const AuditSection = () => {
   const checklist = [
@@ -11,12 +11,59 @@ const AuditSection = () => {
     "Missed growth opportunities"
   ];
 
+  // State for dynamic simulation chart data
+  const [optimizedData, setOptimizedData] = useState([30, 35, 42, 50, 48, 62, 58, 70, 78, 85]);
+  const [unoptimizedData, setUnoptimizedData] = useState([20, 25, 22, 28, 24, 26, 21, 25, 22, 26]);
+  const [liveEnquiries, setLiveEnquiries] = useState(142);
+  const [liveCpl, setLiveCpl] = useState(480);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      // 1. Update optimized line (steady rising trend with fluctuations)
+      setOptimizedData((prev) => {
+        const last = prev[prev.length - 1];
+        let next = last + Math.floor(Math.random() * 14) - 5; // -5 to +8
+        if (next > 96) next = 92;
+        if (next < 62) next = 66;
+        return [...prev.slice(1), next];
+      });
+
+      // 2. Update unoptimized line (low flat trend with minor oscillations)
+      setUnoptimizedData((prev) => {
+        const last = prev[prev.length - 1];
+        let next = last + Math.floor(Math.random() * 9) - 4; // -4 to +4
+        if (next > 35) next = 29;
+        if (next < 16) next = 20;
+        return [...prev.slice(1), next];
+      });
+
+      // 3. Update HUD live numbers
+      setLiveEnquiries((prev) => {
+        const change = Math.floor(Math.random() * 3) - 1; // -1 to +2
+        return Math.max(125, Math.min(220, prev + change));
+      });
+
+      setLiveCpl((prev) => {
+        const change = Math.floor(Math.random() * 5) - 3; // -3 to +2 (downward drift)
+        return Math.max(160, Math.min(590, prev - change));
+      });
+    }, 1500);
+
+    return () => clearInterval(timer);
+  }, []);
+
   const handleScrollToForm = () => {
     const element = document.getElementById('contact');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  // Convert array values to SVG coordinate paths
+  // Width: 380, Height: 180, scale values from [0, 100] to Y [15, 165]
+  const optPath = optimizedData.map((val, i) => `${i === 0 ? 'M' : 'L'} ${(i * 380) / 9} ${165 - (val * 150) / 100}`).join(' ');
+  const optAreaPath = optPath + ' L 380 180 L 0 180 Z';
+  const unoptPath = unoptimizedData.map((val, i) => `${i === 0 ? 'M' : 'L'} ${(i * 380) / 9} ${165 - (val * 150) / 100}`).join(' ');
 
   return (
     <section id="audit" style={{ backgroundColor: 'var(--bg-soft)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '6.5rem 0', position: 'relative' }}>
@@ -46,14 +93,6 @@ const AuditSection = () => {
             }}>
               Get A Free IVF Clinic Growth Audit
             </h2>
-            <p style={{
-              fontSize: '1.1rem',
-              color: 'var(--text-muted)',
-              marginBottom: '2rem',
-              lineHeight: 1.6
-            }}>
-              We will review your clinic’s online presence and show what can be improved to generate better patient enquiries. You get a personalized video or PDF report showing exact adjustments you can make.
-            </p>
 
             <div style={{
               display: 'grid',
@@ -98,88 +137,175 @@ const AuditSection = () => {
             </button>
           </div>
 
-          {/* Right Visual Audit Report Teaser */}
+          {/* Right Visual Simulated Running Graph Dashboard widget */}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div style={{
               width: '100%',
               maxWidth: '460px',
-              backgroundColor: 'var(--bg-card)',
+              backgroundColor: '#051024',
+              backgroundImage: 'linear-gradient(135deg, #07122a 0%, #030816 100%)',
               borderRadius: 'var(--radius-lg)',
-              border: '1px solid var(--border)',
-              padding: '2rem',
-              boxShadow: 'var(--shadow-xl)',
-              background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
+              border: '1px solid rgba(14, 165, 233, 0.18)',
+              padding: '1.75rem',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 30px rgba(14, 165, 233, 0.05)',
               position: 'relative',
-              overflow: 'hidden'
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.25rem',
             }}>
-              {/* Header inside Report Teaser */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', borderBottom: '1px solid var(--border)', paddingBottom: '1rem' }}>
+              {/* Header inside Simulated Dashboard */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255, 255, 255, 0.07)', paddingBottom: '0.85rem' }}>
                 <div>
-                  <div style={{ fontSize: '0.65rem', color: 'var(--cyan)', fontWeight: 700, letterSpacing: '0.1em' }}>DIAGNOSTIC REPORT</div>
-                  <div style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--primary)' }}>IVF Growth Audit</div>
+                  <div style={{ fontSize: '0.65rem', color: 'var(--cyan)', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase' }}>Live Performance Simulation</div>
+                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'white', fontFamily: 'var(--font-display)' }}>Patient Enquiry Growth</div>
                 </div>
                 <div style={{
-                  padding: '0.25rem 0.65rem',
-                  backgroundColor: 'rgba(14, 165, 233, 0.08)',
-                  color: 'var(--cyan)',
+                  padding: '0.3rem 0.65rem',
+                  backgroundColor: 'rgba(34, 197, 94, 0.12)',
+                  color: '#22c55e',
+                  border: '1px solid rgba(34, 197, 94, 0.25)',
                   borderRadius: 'var(--radius-sm)',
-                  fontSize: '0.7rem',
-                  fontWeight: 700
+                  fontSize: '0.72rem',
+                  fontWeight: 800,
+                  letterSpacing: '0.04em'
                 }}>
-                  FREE
+                  ACTIVE PLOT
                 </div>
               </div>
 
-              {/* Checklist visual mockup preview */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <div style={{ opacity: 0.85 }}>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)' }}>1. SOCIAL MEDIA ENGAGEMENT</div>
-                  <div style={{ height: '8px', backgroundColor: '#e2e8f0', borderRadius: '4px', marginTop: '0.35rem', overflow: 'hidden' }}>
-                    <div style={{ width: '42%', height: '100%', backgroundColor: 'var(--cyan)' }} />
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', marginTop: '0.25rem', color: 'var(--cyan)', fontWeight: 600 }}>
-                    <span>Low Patient Trust Flow</span>
-                    <span>Score: 42%</span>
-                  </div>
-                </div>
-
-                <div style={{ opacity: 0.85 }}>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)' }}>2. ENQUIRY FORM CONVERSION</div>
-                  <div style={{ height: '8px', backgroundColor: '#e2e8f0', borderRadius: '4px', marginTop: '0.35rem', overflow: 'hidden' }}>
-                    <div style={{ width: '28%', height: '100%', backgroundColor: 'var(--cyan)' }} />
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', marginTop: '0.25rem', color: 'var(--cyan)', fontWeight: 600 }}>
-                    <span>High Ad Spend Leakage</span>
-                    <span>Score: 28%</span>
-                  </div>
-                </div>
-
-                <div style={{ opacity: 0.85 }}>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)' }}>3. PATIENT CARE FOLLOW-UP</div>
-                  <div style={{ height: '8px', backgroundColor: '#e2e8f0', borderRadius: '4px', marginTop: '0.35rem', overflow: 'hidden' }}>
-                    <div style={{ width: '35%', height: '100%', backgroundColor: 'var(--cyan)' }} />
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', marginTop: '0.25rem', color: 'var(--cyan)', fontWeight: 600 }}>
-                    <span>Unoptimized OPD Nurturing</span>
-                    <span>Score: 35%</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Callout inside Teaser */}
+              {/* Stats Counters Grid */}
               <div style={{
-                marginTop: '1.75rem',
-                backgroundColor: 'rgba(14, 165, 233, 0.04)',
-                border: '1px dashed var(--cyan)',
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '1rem',
+                backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                padding: '0.85rem 1rem',
                 borderRadius: 'var(--radius-md)',
-                padding: '1rem',
+                border: '1px solid rgba(255, 255, 255, 0.04)'
+              }}>
+                <div>
+                  <div style={{ fontSize: '0.68rem', color: '#cbd5e1', fontWeight: 600 }}>Monthly Enquiries</div>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.4rem', marginTop: '0.15rem' }}>
+                    <span style={{ fontSize: '1.4rem', fontWeight: 800, color: 'white' }}>{liveEnquiries}</span>
+                    <span style={{ fontSize: '0.75rem', color: '#22c55e', fontWeight: 800 }}>+232%</span>
+                  </div>
+                </div>
+                <div style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.08)', paddingLeft: '1rem' }}>
+                  <div style={{ fontSize: '0.68rem', color: '#cbd5e1', fontWeight: 600 }}>Ad Spend Cost (CPL)</div>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.4rem', marginTop: '0.15rem' }}>
+                    <span style={{ fontSize: '1.4rem', fontWeight: 800, color: 'white' }}>₹{liveCpl}</span>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--cyan)', fontWeight: 800 }}>-64%</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Running Chart SVG Container */}
+              <div style={{ position: 'relative', width: '100%', height: '170px' }}>
+                <svg viewBox="0 0 380 180" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
+                  <defs>
+                    <linearGradient id="opt-area-gradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#1cbcc3" stopOpacity="0.22" />
+                      <stop offset="100%" stopColor="#1cbcc3" stopOpacity="0" />
+                    </linearGradient>
+                    <linearGradient id="opt-stroke-gradient" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#1cbcc3" />
+                      <stop offset="60%" stopColor="#0ea5e9" />
+                      <stop offset="100%" stopColor="#4abf8f" />
+                    </linearGradient>
+                  </defs>
+
+                  {/* Horizontal Grid lines */}
+                  <line x1="0" y1="15" x2="380" y2="15" stroke="rgba(255, 255, 255, 0.03)" strokeDasharray="3 3" />
+                  <line x1="0" y1="52.5" x2="380" y2="52.5" stroke="rgba(255, 255, 255, 0.04)" strokeDasharray="3 3" />
+                  <line x1="0" y1="90" x2="380" y2="90" stroke="rgba(255, 255, 255, 0.04)" strokeDasharray="3 3" />
+                  <line x1="0" y1="127.5" x2="380" y2="127.5" stroke="rgba(255, 255, 255, 0.04)" strokeDasharray="3 3" />
+                  <line x1="0" y1="165" x2="380" y2="165" stroke="rgba(255, 255, 255, 0.03)" strokeDasharray="3 3" />
+
+                  {/* Unoptimized Line (Dotted Red, Low Performance) */}
+                  <path
+                    d={unoptPath}
+                    fill="none"
+                    stroke="#ef4444"
+                    strokeWidth="1.5"
+                    strokeDasharray="4 4"
+                    opacity="0.6"
+                    style={{ transition: 'd 0.35s ease-in-out' }}
+                  />
+
+                  {/* Optimized Campaign Fill Area */}
+                  <path
+                    d={optAreaPath}
+                    fill="url(#opt-area-gradient)"
+                    style={{ transition: 'd 0.35s ease-in-out' }}
+                  />
+
+                  {/* Optimized Campaign Line (Gradient, Thick, Glowing) */}
+                  <path
+                    d={optPath}
+                    fill="none"
+                    stroke="url(#opt-stroke-gradient)"
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    style={{ transition: 'd 0.35s ease-in-out' }}
+                  />
+
+                  {/* Pulse tracking dot at the latest value (right edge x=380) */}
+                  <circle
+                    cx="380"
+                    cy={165 - (optimizedData[9] * 150) / 100}
+                    r="5.5"
+                    fill="#4abf8f"
+                    style={{ transition: 'cy 0.35s ease-in-out' }}
+                  />
+                  <circle
+                    cx="380"
+                    cy={165 - (optimizedData[9] * 150) / 100}
+                    r="12"
+                    fill="none"
+                    stroke="#4abf8f"
+                    strokeWidth="2"
+                    opacity="0.6"
+                    style={{ transition: 'cy 0.35s ease-in-out' }}
+                  >
+                    <animate attributeName="r" values="5.5;15;5.5" dur="2s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.7;0;0.7" dur="2s" repeatCount="indefinite" />
+                  </circle>
+                </svg>
+              </div>
+
+              {/* Legend & Labels row */}
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                fontSize: '0.72rem',
+                borderTop: '1px solid rgba(255,255,255,0.07)',
+                paddingTop: '0.85rem'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#4abf8f', display: 'inline-block' }} />
+                  <span style={{ color: '#e2e8f0', fontWeight: 600 }}>Optimized Campaigns</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#ef4444', display: 'inline-block', opacity: 0.7 }} />
+                  <span style={{ color: '#94a3b8', fontWeight: 500 }}>Unoptimized (Ads Waste)</span>
+                </div>
+              </div>
+
+              {/* Callout box under the running chart */}
+              <div style={{
+                backgroundColor: 'rgba(14, 165, 233, 0.05)',
+                border: '1px dashed rgba(14, 165, 233, 0.25)',
+                borderRadius: 'var(--radius-md)',
+                padding: '0.85rem 1rem',
                 textAlign: 'center'
               }}>
-                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--cyan)' }}>
-                  Unlock 3 Custom Recommendations
+                <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--cyan)' }}>
+                  Unlock Customized Audit Insights
                 </div>
-                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
-                  No commitment required. Simple, actionable growth advice.
+                <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.15rem' }}>
+                  See exact metrics on where your clinic’s budget is leaking.
                 </div>
               </div>
 

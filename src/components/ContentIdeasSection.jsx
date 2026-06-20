@@ -29,20 +29,6 @@ const ContentIdeasSection = () => {
       metric: "High Intent OPD Leads",
       why: "Generates high urgency for couples in their late 30s who need consultations immediately.",
       image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80",
-    },
-    {
-      title: "Embryo transfer के बाद क्या care रखें?",
-      views: "180k+ Views",
-      metric: "Viral Potential",
-      why: "Saves patient anxiety during the two-week wait and ranks high in sharing.",
-      image: "https://images.unsplash.com/photo-1530026405186-ed1ea0ac7a63?auto=format&fit=crop&w=600&q=80",
-    },
-    {
-      title: "Natural pregnancy vs IVF — कब क्या सही है?",
-      views: "65k+ Views",
-      metric: "Patient Filter",
-      why: "Helps couples differentiate when to wait naturally vs when to seek specialized help.",
-      image: "https://images.unsplash.com/photo-1518063319789-7217e6706b04?auto=format&fit=crop&w=600&q=80",
     }
   ];
 
