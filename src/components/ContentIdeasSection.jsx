@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const ContentIdeasSection = () => {
   const topics = [
@@ -32,15 +32,46 @@ const ContentIdeasSection = () => {
     }
   ];
 
+  const sectionRef = useRef(null);
+  const [transformX, setTransformX] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Check if section is visible in viewport
+        if (rect.top < windowHeight && rect.bottom > 0) {
+          // Calculate scroll progress (0 when section enters, 1 when section leaves viewport)
+          const enterPosition = windowHeight;
+          const exitPosition = -rect.height;
+          const currentPosition = rect.top;
+          
+          const progress = (enterPosition - currentPosition) / (enterPosition - exitPosition);
+          
+          // Translate dynamically: on mobile, slide more to reveal overflowing cards
+          const maxScrollRange = window.innerWidth < 768 ? 400 : 200;
+          const translateVal = (0.5 - progress) * maxScrollRange;
+          setTransformX(translateVal);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Run once on mount
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <section style={{ padding: '6rem 0', position: 'relative' }}>
+    <section ref={sectionRef} style={{ padding: '6.5rem 0', position: 'relative', overflow: 'hidden', backgroundColor: 'var(--bg-main)' }}>
       {/* Background decoration */}
       <div className="grid-overlay" />
       
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
         {/* Header */}
-        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 4.5rem auto' }}>
+        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 3rem auto' }}>
           <span className="badge badge-cyan" style={{ backgroundColor: 'rgba(14, 165, 233, 0.08)', color: 'var(--cyan)' }}>
             Patient Psychology
           </span>
@@ -59,135 +90,172 @@ const ContentIdeasSection = () => {
           </p>
         </div>
 
-        {/* Grid representing Reel Previews */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '2rem'
-        }} className="topics-grid">
-          {topics.map((tp, idx) => (
-            <div
-              key={idx}
-              style={{
-                backgroundColor: 'var(--bg-card)',
-                borderRadius: 'var(--radius-lg)',
-                border: '1px solid var(--border)',
-                padding: '1.5rem',
-                boxShadow: 'var(--shadow-sm)',
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-              className="topic-card"
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-6px)';
-                e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
-                e.currentTarget.style.borderColor = 'rgba(14, 165, 233, 0.25)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
-                e.currentTarget.style.borderColor = 'var(--border)';
-              }}
-            >
-              {/* Reel Play Mockup aspect ratio */}
-              <div style={{
-                width: '100%',
-                height: '180px',
-                borderRadius: 'var(--radius-md)',
-                backgroundImage: `linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.35)), url("${tp.image}")`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                position: 'relative',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.25rem',
-                overflow: 'hidden',
-                boxShadow: 'inset 0 0 30px rgba(0,0,0,0.1)',
-                border: '1px solid var(--border)',
-              }}>
-                {/* Play Button Icon Overlay */}
+        {/* Scroll Parallel Scrolling Cards Track */}
+        <div className="parallel-scrolling-container">
+          <div 
+            style={{
+              display: 'flex',
+              gap: '2rem',
+              transform: `translate3d(${transformX}px, 0, 0)`,
+              transition: 'transform 0.2s cubic-bezier(0.25, 1, 0.5, 1)',
+              padding: '1.5rem 0'
+            }} 
+            className="topics-track"
+          >
+            {topics.map((tp, idx) => (
+              <div
+                key={idx}
+                style={{
+                  backgroundColor: 'var(--bg-card)',
+                  borderRadius: 'var(--radius-lg)',
+                  border: '1px solid var(--border)',
+                  padding: '1.5rem',
+                  boxShadow: 'var(--shadow-sm)',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  width: '300px', // Fixed card width for consistent layout
+                  flexShrink: 0,
+                }}
+                className="topic-card"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-6px) scale(1.01)';
+                  e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
+                  e.currentTarget.style.borderColor = 'rgba(14, 165, 233, 0.25)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+                  e.currentTarget.style.borderColor = 'var(--border)';
+                }}
+              >
+                {/* Reel Play Mockup aspect ratio */}
                 <div style={{
-                  width: '46px',
-                  height: '46px',
-                  borderRadius: '50%',
-                  backgroundColor: 'white',
+                  width: '100%',
+                  height: '180px',
+                  borderRadius: 'var(--radius-md)',
+                  backgroundImage: `linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.35)), url("${tp.image}")`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  position: 'relative',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  boxShadow: 'var(--shadow-md)',
-                  color: 'var(--primary)',
+                  marginBottom: '1.25rem',
+                  overflow: 'hidden',
+                  boxShadow: 'inset 0 0 30px rgba(0,0,0,0.1)',
+                  border: '1px solid var(--border)',
                 }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{ marginLeft: '3px' }}>
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                  </svg>
+                  {/* Play Button Icon Overlay */}
+                  <div style={{
+                    width: '46px',
+                    height: '46px',
+                    borderRadius: '50%',
+                    backgroundColor: 'white',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: 'var(--shadow-md)',
+                    color: 'var(--primary)',
+                  }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{ marginLeft: '3px' }}>
+                      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                  </div>
+
+                  {/* Badge Overlay Left Top */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '12px',
+                    left: '12px',
+                    backgroundColor: 'rgba(11, 26, 48, 0.8)',
+                    backdropFilter: 'blur(4px)',
+                    color: 'white',
+                    padding: '0.25rem 0.6rem',
+                    borderRadius: 'var(--radius-sm)',
+                    fontSize: '0.7rem',
+                    fontWeight: 700
+                  }}>
+                    {tp.metric}
+                  </div>
+
+                  {/* Badge Overlay Right Bottom */}
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '12px',
+                    right: '12px',
+                    backgroundColor: 'rgba(255,255,255,0.9)',
+                    color: 'var(--text-dark)',
+                    padding: '0.25rem 0.6rem',
+                    borderRadius: 'var(--radius-sm)',
+                    fontSize: '0.7rem',
+                    fontWeight: 700,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.35rem'
+                  }}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    {tp.views}
+                  </div>
                 </div>
 
-                {/* Badge Overlay Left Top */}
-                <div style={{
-                  position: 'absolute',
-                  top: '12px',
-                  left: '12px',
-                  backgroundColor: 'rgba(11, 26, 48, 0.8)',
-                  backdropFilter: 'blur(4px)',
-                  color: 'white',
-                  padding: '0.25rem 0.6rem',
-                  borderRadius: 'var(--radius-sm)',
-                  fontSize: '0.7rem',
+                {/* Title / Question */}
+                <h3 style={{
+                  fontSize: '1.15rem',
+                  color: 'var(--primary)',
+                  lineHeight: 1.4,
+                  marginBottom: '0.75rem',
                   fontWeight: 700
                 }}>
-                  {tp.metric}
-                </div>
+                  {tp.title}
+                </h3>
 
-                {/* Badge Overlay Right Bottom */}
-                <div style={{
-                  position: 'absolute',
-                  bottom: '12px',
-                  right: '12px',
-                  backgroundColor: 'rgba(255,255,255,0.9)',
-                  color: 'var(--text-dark)',
-                  padding: '0.25rem 0.6rem',
-                  borderRadius: 'var(--radius-sm)',
-                  fontSize: '0.7rem',
-                  fontWeight: 700,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.35rem'
+                {/* Actionable insight explanation */}
+                <p style={{
+                  fontSize: '0.88rem',
+                  color: 'var(--text-muted)',
+                  lineHeight: 1.5,
+                  marginTop: 'auto'
                 }}>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                  {tp.views}
-                </div>
+                  <strong style={{ color: 'var(--primary-light)' }}>Why it works:</strong> {tp.why}
+                </p>
               </div>
-
-              {/* Title / Question */}
-              <h3 style={{
-                fontSize: '1.15rem',
-                color: 'var(--primary)',
-                lineHeight: 1.4,
-                marginBottom: '0.75rem',
-                fontWeight: 700
-              }}>
-                {tp.title}
-              </h3>
-
-              {/* Actionable insight explanation */}
-              <p style={{
-                fontSize: '0.88rem',
-                color: 'var(--text-muted)',
-                lineHeight: 1.5,
-                marginTop: 'auto'
-              }}>
-                <strong style={{ color: 'var(--primary-light)' }}>Why it works:</strong> {tp.why}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
       </div>
+
+      <style>{`
+        .parallel-scrolling-container {
+          width: 100%;
+          overflow: visible;
+          position: relative;
+        }
+
+        /* Center alignment adjustments for tracks */
+        @media (min-width: 1200px) {
+          .parallel-scrolling-container {
+            display: flex;
+            justify-content: center;
+          }
+          .topics-track {
+            transform: none !important; /* Lock translation on large screens since they fit natively */
+          }
+        }
+
+        @media (max-width: 1199px) {
+          .parallel-scrolling-container {
+            /* Mask overflow elegantly on medium viewports */
+            overflow-x: hidden;
+            margin: 0 -1.5rem;
+            padding: 0 1.5rem;
+          }
+        }
+      `}</style>
     </section>
   );
 };

@@ -441,36 +441,36 @@ const Hero = () => {
                 {/* Overlay Glassmorphism Info Box */}
                 <div style={{
                   position: 'absolute',
-                  bottom: '1.5rem',
-                  left: '1.5rem',
-                  right: '1.5rem',
-                  backgroundColor: 'rgba(5, 20, 41, 0.78)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  padding: '1rem 1.5rem',
+                  bottom: '1.25rem',
+                  left: '1.25rem',
+                  backgroundColor: 'rgba(5, 20, 41, 0.25)',
+                  backdropFilter: 'blur(4px)',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  padding: '0.6rem 1.2rem',
                   borderRadius: 'var(--radius-md)',
                   color: 'white',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.85rem',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                  gap: '0.65rem',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
                   zIndex: 15,
                   textAlign: 'left',
-                }}>
+                  maxWidth: 'calc(100% - 2.5rem)',
+                }} className="hero-mockup-info">
                   <div style={{
-                    width: '10px',
-                    height: '10px',
+                    width: '8px',
+                    height: '8px',
                     borderRadius: '50%',
                     backgroundColor: 'var(--orange)',
-                    boxShadow: '0 0 10px var(--orange)',
+                    boxShadow: '0 0 8px var(--orange)',
                     animation: 'pulse 2s infinite',
                     flexShrink: 0,
                   }} />
                   <div>
-                    <div style={{ fontSize: '0.92rem', fontWeight: 800, color: 'white', fontFamily: 'var(--font-display)', lineHeight: 1.2 }}>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 800, color: 'white', fontFamily: 'var(--font-display)', lineHeight: 1.2 }} className="hero-mockup-title">
                       Bawra Digitals Campaign
                     </div>
-                    <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '0.15rem', lineHeight: 1.2 }}>
+                    <div style={{ fontSize: '0.72rem', color: '#cbd5e1', marginTop: '0.15rem', lineHeight: 1.2 }} className="hero-mockup-subtitle">
                       Attracting High-Intent IVF Enquiries & Patient Trust
                     </div>
                   </div>
@@ -510,6 +510,30 @@ const Hero = () => {
         @media (max-width: 991px) {
           .floating-card-desktop, .floating-element-desktop {
             display: none !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .hero-mockup {
+            max-width: 95% !important;
+            aspect-ratio: 16 / 11 !important;
+            margin: 0 auto !important;
+            transform: none !important;
+          }
+          .hero-mockup-info {
+            bottom: 0.5rem !important;
+            left: 0.5rem !important;
+            right: auto !important;
+            max-width: calc(100% - 1rem) !important;
+            padding: 0.45rem 0.75rem !important;
+            gap: 0.5rem !important;
+            border-radius: var(--radius-sm) !important;
+          }
+          .hero-mockup-title {
+            font-size: 0.75rem !important;
+          }
+          .hero-mockup-subtitle {
+            font-size: 0.62rem !important;
+            margin-top: 0.05rem !important;
           }
         }
       `}</style>

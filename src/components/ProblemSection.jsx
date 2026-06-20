@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const ProblemSection = () => {
   const problems = [
@@ -60,8 +60,34 @@ const ProblemSection = () => {
     }
   ];
 
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.08,
+        rootMargin: '0px 0px -60px 0px',
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <section id="problems" style={{ backgroundColor: 'var(--bg-soft)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+    <section ref={sectionRef} id="problems" style={{ backgroundColor: 'var(--bg-soft)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '6.5rem 0' }}>
       {/* Abstract Background details */}
       <div className="grid-overlay" />
       
@@ -87,16 +113,12 @@ const ProblemSection = () => {
           </p>
         </div>
 
-        {/* Cards Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '2rem',
-        }}>
+        {/* Cards Grid - Fixed 2x2 layout on all screens */}
+        <div className="problems-grid">
           {problems.map((prob, idx) => (
             <div
               key={idx}
-              className="problem-card"
+              className={`problem-card ${isVisible ? 'visible' : ''}`}
               style={{
                 backgroundColor: 'var(--bg-card)',
                 borderRadius: 'var(--radius-lg)',
@@ -104,69 +126,35 @@ const ProblemSection = () => {
                 border: '1px solid var(--border)',
                 display: 'flex',
                 flexDirection: 'column',
-                transition: 'all 0.3s ease',
                 position: 'relative',
                 overflow: 'hidden',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-5px)';
-                e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
-                e.currentTarget.style.borderColor = 'rgba(14, 165, 233, 0.25)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-                e.currentTarget.style.borderColor = 'var(--border)';
+                transitionDelay: `${idx * 0.15}s`
               }}
             >
               {/* Card Header Image */}
-              <div style={{
-                height: '160px',
-                width: '100%',
-                backgroundImage: `linear-gradient(to bottom, rgba(5, 20, 41, 0.15), rgba(5, 20, 41, 0.55)), url(${prob.image})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                position: 'relative',
+              <div className="problem-card-image" style={{
+                backgroundImage: `linear-gradient(to bottom, rgba(5, 20, 41, 0.15), rgba(5, 20, 41, 0.55)), url(${prob.image})`
               }}>
                 {/* Floating Icon Container */}
-                <div style={{
-                  position: 'absolute',
-                  bottom: '-22px',
-                  left: '20px',
-                  width: '46px',
-                  height: '46px',
-                  borderRadius: '50%',
-                  backgroundColor: 'white',
-                  color: 'var(--cyan)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: 'var(--shadow-md)',
-                  border: '1px solid var(--border)',
-                  zIndex: 2,
-                }}>
+                <div className="problem-card-icon-container">
                   {prob.icon}
                 </div>
               </div>
 
               {/* Card Body */}
-              <div style={{ padding: '2.25rem 1.5rem 1.5rem 1.5rem', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+              <div className="problem-card-body">
                 {/* Title */}
-                <h3 style={{
-                  fontSize: '1.2rem',
+                <h3 className="problem-card-title" style={{
                   color: 'var(--primary)',
-                  marginBottom: '0.75rem',
                   fontWeight: 700,
                 }}>
                   {prob.title}
                 </h3>
 
                 {/* Core descriptive text */}
-                <p style={{
+                <p className="problem-card-desc" style={{
                   color: 'var(--cyan)',
                   fontWeight: 600,
-                  fontSize: '0.95rem',
-                  marginBottom: '1rem',
                   display: 'flex',
                   alignItems: 'flex-start',
                   gap: '0.5rem',
@@ -177,10 +165,9 @@ const ProblemSection = () => {
                 </p>
 
                 {/* Detail paragraph */}
-                <p style={{
-                  fontSize: '0.92rem',
+                <p className="problem-card-detail" style={{
                   color: 'var(--text-muted)',
-                  lineHeight: 1.5,
+                  lineHeight: 1.6,
                   marginTop: 'auto',
                 }}>
                   {prob.detail}
@@ -191,6 +178,189 @@ const ProblemSection = () => {
         </div>
 
       </div>
+
+      <style>{`
+        .problems-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2.25rem;
+          max-width: 1100px;
+          margin: 0 auto;
+        }
+
+        .problem-card {
+          opacity: 0;
+          transform: translateY(50px);
+          transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .problem-card.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .problem-card.visible:hover {
+          transform: translateY(-6px);
+          box-shadow: var(--shadow-lg);
+          border-color: rgba(14, 165, 233, 0.25);
+          transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+        }
+
+        .problem-card-image {
+          height: 180px;
+          width: 100%;
+          background-size: cover;
+          background-position: center;
+          position: relative;
+        }
+
+        .problem-card-icon-container {
+          position: absolute;
+          bottom: -22px;
+          left: 20px;
+          width: 46px;
+          height: 46px;
+          border-radius: 50%;
+          background-color: white;
+          color: var(--cyan);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: var(--shadow-md);
+          border: 1px solid var(--border);
+          z-index: 2;
+        }
+
+        .problem-card-body {
+          padding: 2.5rem 1.75rem 1.75rem 1.75rem;
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .problem-card-title,
+        .problem-card-desc,
+        .problem-card-detail {
+          opacity: 0;
+          transform: translateY(15px);
+          transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .problem-card.visible .problem-card-title {
+          opacity: 1;
+          transform: translateY(0);
+          transition-delay: 0.1s;
+        }
+
+        .problem-card.visible .problem-card-desc {
+          opacity: 1;
+          transform: translateY(0);
+          transition-delay: 0.2s;
+        }
+
+        .problem-card.visible .problem-card-detail {
+          opacity: 1;
+          transform: translateY(0);
+          transition-delay: 0.3s;
+        }
+
+        .problem-card-title {
+          font-size: 1.25rem;
+          margin-bottom: 0.75rem;
+        }
+
+        .problem-card-desc {
+          font-size: 0.98rem;
+          margin-bottom: 1rem;
+        }
+
+        .problem-card-detail {
+          font-size: 0.94rem;
+        }
+
+        @media (max-width: 768px) {
+          .problems-grid {
+            grid-template-columns: repeat(2, 1fr) !important; /* Force side-by-side on tablet/mobile */
+            gap: 0.85rem;
+          }
+          
+          .problem-card {
+            transition-delay: 0s !important;
+            transform: translateY(30px);
+            border-radius: var(--radius-md) !important;
+          }
+
+          .problem-card.visible .problem-card-title {
+            transition-delay: 0.05s !important;
+          }
+
+          .problem-card.visible .problem-card-desc {
+            transition-delay: 0.12s !important;
+          }
+
+          .problem-card.visible .problem-card-detail {
+            transition-delay: 0.2s !important;
+          }
+
+          .problem-card-image {
+            height: 110px !important;
+          }
+
+          .problem-card-icon-container {
+            width: 34px !important;
+            height: 34px !important;
+            bottom: -17px !important;
+            left: 12px !important;
+          }
+
+          .problem-card-icon-container svg {
+            width: 18px !important;
+            height: 18px !important;
+          }
+
+          .problem-card-body {
+            padding: 1.5rem 0.85rem 0.85rem 0.85rem !important;
+          }
+
+          .problem-card-title {
+            font-size: 0.95rem !important;
+            margin-bottom: 0.4rem !important;
+            line-height: 1.2;
+          }
+
+          .problem-card-desc {
+            font-size: 0.8rem !important;
+            margin-bottom: 0.5rem !important;
+            line-height: 1.3;
+          }
+
+          .problem-card-detail {
+            font-size: 0.75rem !important;
+            line-height: 1.4;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .problems-grid {
+            gap: 0.5rem;
+          }
+          .problem-card-image {
+            height: 90px !important;
+          }
+          .problem-card-body {
+            padding: 1.25rem 0.6rem 0.6rem 0.6rem !important;
+          }
+          .problem-card-title {
+            font-size: 0.85rem !important;
+          }
+          .problem-card-desc {
+            font-size: 0.72rem !important;
+          }
+          .problem-card-detail {
+            font-size: 0.68rem !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };
