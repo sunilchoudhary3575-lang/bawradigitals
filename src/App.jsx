@@ -7,7 +7,6 @@ import AuditSection from './components/AuditSection';
 import TrustSection from './components/TrustSection';
 import FounderSection from './components/FounderSection';
 import TestimonialsSection from './components/TestimonialsSection';
-import ContentIdeasSection from './components/ContentIdeasSection';
 import LeadForm from './components/LeadForm';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
@@ -67,9 +66,6 @@ function App() {
 
         {/* Our Work Gallery Section */}
         <FounderSection />
-
-        {/* Content That IVF Patients Actually Watch (hindi/english reel ideas) */}
-        <ContentIdeasSection />
 
         {/* Interactive Audit Booking Lead Form */}
         <LeadForm />
