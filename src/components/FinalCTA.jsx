@@ -23,7 +23,7 @@ const FinalCTA = () => {
         pointerEvents: 'none'
       }} />
 
-      <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '850px' }}>
+      <div className="container" data-aos="fade-up" style={{ position: 'relative', zIndex: 1, maxWidth: '850px' }}>
         <span className="badge badge-cyan" style={{ backgroundColor: 'rgba(14, 165, 233, 0.25)', color: '#e0f2fe' }}>
           Take the first step
         </span>

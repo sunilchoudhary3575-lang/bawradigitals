@@ -80,10 +80,10 @@ const AuditSection = () => {
           
           {/* Left Checklist Details */}
           <div>
-            <span className="badge badge-cyan" style={{ backgroundColor: 'rgba(14, 165, 233, 0.08)', color: 'var(--cyan)' }}>
+            <span className="badge badge-cyan" data-aos="fade-up" style={{ backgroundColor: 'rgba(14, 165, 233, 0.08)', color: 'var(--cyan)' }}>
               100% Free Offer
             </span>
-            <h2 style={{
+            <h2 data-aos="fade-up" data-aos-delay="100" style={{
               fontSize: 'clamp(2rem, 4vw, 2.6rem)',
               color: 'var(--primary)',
               marginTop: '0.5rem',
@@ -101,7 +101,7 @@ const AuditSection = () => {
               marginBottom: '2.5rem',
             }} className="checklist-subgrid">
               {checklist.map((item, idx) => (
-                <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                <div key={idx} data-aos="fade-up" data-aos-delay={idx * 50 + 150} style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
                   <div style={{
                     width: '24px',
                     height: '24px',
@@ -126,6 +126,8 @@ const AuditSection = () => {
 
             <button
               onClick={handleScrollToForm}
+              data-aos="fade-up"
+              data-aos-delay="500"
               className="btn btn-primary"
               style={{ fontSize: '1.1rem', padding: '1rem 2.25rem' }}
             >
@@ -139,7 +141,7 @@ const AuditSection = () => {
 
           {/* Right Visual Simulated Running Graph Dashboard widget */}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{
+            <div data-aos="zoom-in" data-aos-delay="200" style={{
               width: '100%',
               maxWidth: '460px',
               backgroundColor: '#051024',

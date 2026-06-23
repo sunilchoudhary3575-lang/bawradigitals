@@ -80,7 +80,7 @@ const LeadForm = () => {
         }} className="form-grid">
 
           {/* Left copy column */}
-          <div style={{ marginTop: '1rem' }}>
+          <div data-aos="fade-up" style={{ marginTop: '1rem' }}>
             <span className="badge badge-cyan" style={{ backgroundColor: 'rgba(14, 165, 233, 0.08)', color: 'var(--cyan)' }}>Get Access</span>
             <h2 style={{
               fontSize: 'clamp(2rem, 4vw, 2.6rem)',
@@ -167,7 +167,7 @@ const LeadForm = () => {
 
           {/* Right Form Card */}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{
+            <div data-aos="zoom-in" data-aos-delay="200" style={{
               width: '100%',
               maxWidth: '560px',
               backgroundColor: 'var(--bg-card)',

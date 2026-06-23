@@ -76,7 +76,7 @@ const TrustSection = () => {
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
         {/* Header */}
-        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 4.5rem auto' }}>
+        <div data-aos="fade-up" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 4.5rem auto' }}>
           <span className="badge badge-cyan" style={{ backgroundColor: 'rgba(14, 165, 233, 0.25)', color: '#e0f2fe' }}>
             Proven Track Record
           </span>
@@ -105,6 +105,8 @@ const TrustSection = () => {
           {points.map((pt, idx) => (
             <div
               key={idx}
+              data-aos="zoom-in"
+              data-aos-delay={idx * 100}
               style={{
                 backgroundColor: 'rgba(255, 255, 255, 0.04)',
                 border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -170,7 +172,7 @@ const TrustSection = () => {
         </div>
 
         {/* Bottom Banner */}
-        <div style={{
+        <div data-aos="fade-up" style={{
           backgroundColor: 'rgba(14, 165, 233, 0.08)',
           border: '1px solid rgba(14, 165, 233, 0.2)',
           borderRadius: 'var(--radius-md)',

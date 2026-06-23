@@ -12,9 +12,19 @@ import LeadForm from './components/LeadForm';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 import BelieversSection from './components/BelieversSection';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function App() {
   const [showStickyBar, setShowStickyBar] = useState(false);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-out-cubic',
+    });
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {

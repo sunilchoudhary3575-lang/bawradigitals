@@ -27,7 +27,7 @@ const FounderSection = () => {
     <section id="gallery" style={{ padding: '6.5rem 0', overflow: 'hidden' }}>
       <div className="container">
         {/* Header Block */}
-        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3rem auto' }}>
+        <div data-aos="fade-up" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3rem auto' }}>
           <span className="badge badge-cyan" style={{ backgroundColor: 'rgba(14, 165, 233, 0.08)', color: 'var(--cyan)' }}>
             Our Gallery
           </span>
@@ -54,6 +54,8 @@ const FounderSection = () => {
               <div 
                 key={img.id} 
                 className={`gallery-item gallery-img-${idx + 1}`}
+                data-aos="zoom-in"
+                data-aos-delay={idx * 100}
                 onClick={() => setActiveImage(img)}
               >
                 <img src={img.src} alt={img.alt} />
@@ -63,7 +65,7 @@ const FounderSection = () => {
         </div>
 
         {/* CTA Button centered */}
-        <div style={{ 
+        <div data-aos="fade-up" style={{ 
           marginTop: '3.5rem', 
           display: 'flex', 
           justifyContent: 'center',

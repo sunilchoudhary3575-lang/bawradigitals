@@ -56,7 +56,7 @@ const SolutionSection = () => {
       <div className="container">
         
         {/* Section Header */}
-        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 4.5rem auto' }}>
+        <div data-aos="fade-up" style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 4.5rem auto' }}>
           <span className="badge badge-primary">Our Approach</span>
           <h2 style={{
             fontSize: 'clamp(2rem, 4vw, 2.6rem)',
@@ -82,6 +82,8 @@ const SolutionSection = () => {
           {solutions.map((sol, idx) => (
             <div
               key={idx}
+              data-aos="zoom-in"
+              data-aos-delay={idx * 100}
               style={{
                 backgroundColor: 'var(--bg-card)',
                 borderRadius: 'var(--radius-lg)',

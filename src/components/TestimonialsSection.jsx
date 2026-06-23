@@ -69,7 +69,7 @@ const TestimonialsSection = () => {
       
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         {/* Section Header */}
-        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3.5rem auto' }}>
+        <div data-aos="fade-up" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3.5rem auto' }}>
           <span className="badge badge-cyan" style={{ backgroundColor: 'rgba(14, 165, 233, 0.08)', color: 'var(--cyan)' }}>
             Testimonials
           </span>
@@ -97,6 +97,8 @@ const TestimonialsSection = () => {
               <div 
                 key={idx} 
                 className="testimonial-card"
+                data-aos="zoom-in"
+                data-aos-delay={idx * 100}
                 style={{
                   backgroundColor: 'var(--bg-card)',
                   borderRadius: 'var(--radius-md)',
@@ -177,7 +179,7 @@ const TestimonialsSection = () => {
         </div>
 
         {/* CTA Button centered */}
-        <div style={{ 
+        <div data-aos="fade-up" style={{ 
           marginTop: '3.5rem', 
           display: 'flex', 
           justifyContent: 'center',

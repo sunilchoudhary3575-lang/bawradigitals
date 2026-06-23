@@ -99,7 +99,7 @@ const Hero = () => {
         }}>
           
           {/* Centered Premium Metric Badge */}
-          <div className="badge badge-cyan" style={{ 
+          <div className="badge badge-cyan" data-aos="fade-up" style={{ 
             display: 'inline-flex', 
             alignItems: 'center', 
             gap: '0.6rem', 
@@ -132,7 +132,7 @@ const Hero = () => {
           </div>
           
           {/* Headline with custom gradient and animated path underline */}
-          <h1 style={{
+          <h1 data-aos="fade-up" data-aos-delay="100" style={{
             fontSize: 'clamp(2.3rem, 5.2vw, 3.9rem)',
             lineHeight: 1.12,
             color: 'var(--text-dark)',
@@ -180,7 +180,7 @@ const Hero = () => {
           </h1>
           
           {/* Sub-headline copy */}
-          <p style={{
+          <p data-aos="fade-up" data-aos-delay="200" style={{
             fontSize: 'clamp(1.05rem, 2vw, 1.25rem)',
             color: 'var(--text-muted)',
             fontWeight: 500,
@@ -192,7 +192,7 @@ const Hero = () => {
           </p>
           
           {/* Centered Actions */}
-          <div style={{
+          <div data-aos="fade-up" data-aos-delay="300" style={{
             display: 'flex',
             flexWrap: 'wrap',
             justifyContent: 'center',
@@ -248,7 +248,7 @@ const Hero = () => {
           </div>
 
           {/* Perspective Parallax Mockup Frame Wrapper */}
-          <div style={{
+          <div data-aos="zoom-in" data-aos-delay="400" style={{
             width: '100%',
             position: 'relative',
             perspective: '1200px',

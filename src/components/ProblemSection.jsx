@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 
 const ProblemSection = () => {
   const problems = [
@@ -60,41 +60,15 @@ const ProblemSection = () => {
     }
   ];
 
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        threshold: 0.08,
-        rootMargin: '0px 0px -60px 0px',
-      }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
   return (
-    <section ref={sectionRef} id="problems" style={{ backgroundColor: 'var(--bg-soft)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '6.5rem 0' }}>
+    <section id="problems" style={{ backgroundColor: 'var(--bg-soft)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '6.5rem 0' }}>
       {/* Abstract Background details */}
       <div className="grid-overlay" />
       
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
         {/* Section Header */}
-        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 4rem auto' }}>
+        <div data-aos="fade-up" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 4rem auto' }}>
           <span className="badge badge-cyan" style={{ backgroundColor: 'rgba(14, 165, 233, 0.08)', color: 'var(--cyan)' }}>
             The Root Issue
           </span>
@@ -118,7 +92,9 @@ const ProblemSection = () => {
           {problems.map((prob, idx) => (
             <div
               key={idx}
-              className={`problem-card ${isVisible ? 'visible' : ''}`}
+              className="problem-card"
+              data-aos="zoom-in"
+              data-aos-delay={idx * 100}
               style={{
                 backgroundColor: 'var(--bg-card)',
                 borderRadius: 'var(--radius-lg)',
@@ -127,8 +103,7 @@ const ProblemSection = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 position: 'relative',
-                overflow: 'hidden',
-                transitionDelay: `${idx * 0.15}s`
+                overflow: 'hidden'
               }}
             >
               {/* Card Header Image */}
@@ -189,20 +164,13 @@ const ProblemSection = () => {
         }
 
         .problem-card {
-          opacity: 0;
-          transform: translateY(50px);
-          transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+          transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .problem-card.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        .problem-card.visible:hover {
-          transform: translateY(-6px);
-          box-shadow: var(--shadow-lg);
-          border-color: rgba(14, 165, 233, 0.25);
+        .problem-card:hover {
+          transform: translateY(-6px) !important;
+          box-shadow: var(--shadow-lg) !important;
+          border-color: rgba(14, 165, 233, 0.25) !important;
           transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
         }
 
@@ -238,32 +206,6 @@ const ProblemSection = () => {
           flex-direction: column;
         }
 
-        .problem-card-title,
-        .problem-card-desc,
-        .problem-card-detail {
-          opacity: 0;
-          transform: translateY(15px);
-          transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .problem-card.visible .problem-card-title {
-          opacity: 1;
-          transform: translateY(0);
-          transition-delay: 0.1s;
-        }
-
-        .problem-card.visible .problem-card-desc {
-          opacity: 1;
-          transform: translateY(0);
-          transition-delay: 0.2s;
-        }
-
-        .problem-card.visible .problem-card-detail {
-          opacity: 1;
-          transform: translateY(0);
-          transition-delay: 0.3s;
-        }
-
         .problem-card-title {
           font-size: 1.25rem;
           margin-bottom: 0.75rem;
@@ -285,21 +227,7 @@ const ProblemSection = () => {
           }
           
           .problem-card {
-            transition-delay: 0s !important;
-            transform: translateY(30px);
             border-radius: var(--radius-md) !important;
-          }
-
-          .problem-card.visible .problem-card-title {
-            transition-delay: 0.05s !important;
-          }
-
-          .problem-card.visible .problem-card-desc {
-            transition-delay: 0.12s !important;
-          }
-
-          .problem-card.visible .problem-card-detail {
-            transition-delay: 0.2s !important;
           }
 
           .problem-card-image {

@@ -112,7 +112,7 @@ const Navbar = () => {
                 alt="Bawra Digitals Logo" 
                 className="navbar-logo logo-base"
                 style={{
-                  height: isScrolled ? '26px' : '36px',
+                  height: isScrolled ? 'var(--logo-height-scrolled)' : 'var(--logo-height)',
                   width: 'auto',
                   objectFit: 'contain',
                   display: 'block',
@@ -136,7 +136,7 @@ const Navbar = () => {
                   alt="Bawra Digitals Logo Hover" 
                   className="navbar-logo"
                   style={{
-                    height: isScrolled ? '26px' : '36px',
+                    height: isScrolled ? 'var(--logo-height-scrolled)' : 'var(--logo-height)',
                     width: 'auto',
                     objectFit: 'contain',
                     transition: 'height 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
@@ -292,6 +292,16 @@ const Navbar = () => {
 
         {/* CSS styles for transitions & animations */}
         <style>{`
+          .navbar-logo {
+            --logo-height: 36px;
+            --logo-height-scrolled: 26px;
+          }
+          @media (max-width: 768px) {
+            .navbar-logo {
+              --logo-height: 28px;
+              --logo-height-scrolled: 21px;
+            }
+          }
           .navbar-logo-hover-layer {
             clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
             transition: clip-path 0.5s cubic-bezier(0.23, 1, 0.32, 1);

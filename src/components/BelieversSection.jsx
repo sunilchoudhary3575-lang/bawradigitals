@@ -44,7 +44,7 @@ const BelieversSection = () => {
       <div className="container">
         
         {/* Section Header */}
-        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 2.5rem auto' }}>
+        <div data-aos="fade-up" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 2.5rem auto' }}>
           <span className="badge badge-primary" style={{ marginBottom: '0.75rem' }}>
             Trusted Partners
           </span>
